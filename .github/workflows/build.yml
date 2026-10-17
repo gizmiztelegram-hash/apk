@@ -26,11 +26,14 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Extract Project Zip If Exists
+      - name: Download Project Source From Host If Missing
         run: |
-          if ls *.zip 1> /dev/null 2>&1; then
-            echo "Found zip file in repository, extracting..."
-            unzip -o -q "*.zip" || true
+          if [ ! -f "package.json" ]; then
+            echo "package.json not found in repository! Downloading full project from host..."
+            curl -sSL "https://ghurfe.ir/Chaikhaneh-Full-Project.zip" -o project.zip
+            unzip -o -q project.zip
+            echo "Successfully unpacked project files!"
+            ls -la
           fi
 
       - name: 1. Install Dependencies & Tools
