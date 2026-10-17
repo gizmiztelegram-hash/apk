@@ -53,7 +53,7 @@ jobs:
           fi
           npx cap sync android
 
-      - name: 4. Apply Tea Cup App Icon
+      - name: 4. Apply Tea Cup App Icon & Fix MainActivity
         run: |
           node fix-android-icons.mjs
 
